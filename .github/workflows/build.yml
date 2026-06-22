@@ -1,0 +1,36 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.tex'
+      - '**.sty'
+      - '**.cls'
+      - '.latexmkrc'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile main.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          # The document contains Japanese (luatexja) and needs the lualatex engine.
+          # Without this, the action's default `-pdf` would force pdflatex.
+          latexmk_use_lualatex: true
+
+      - name: Commit built PDF
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "build: update main.pdf [skip ci]"
+          file_pattern: main.pdf
