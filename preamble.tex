@@ -46,8 +46,10 @@
 \numberwithin{equation}{chapter}
 
 % --- Math macros ---
-% hyperref's PU encoding defines \C as a bookmark accent we never use;
-% reclaim it for the complex numbers (hence \renewcommand, not \newcommand).
+% \C may already be defined (older TeX Live exposes hyperref's PU bookmark
+% accent globally; newer ones don't), so ensure it exists, then reclaim it
+% for the complex numbers. This builds regardless of TeX Live version.
+\providecommand{\C}{}%
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
