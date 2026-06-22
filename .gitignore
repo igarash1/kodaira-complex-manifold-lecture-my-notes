@@ -1,0 +1,34 @@
+# --- Claude / agent tooling (local only) ---
+docs/superpowers/
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
+.superpowers/
+
+# --- Local-only source material (never distribute) ---
+*.HEIC
+*.heic
+photos/
+originals/
+lecturenotes07-kodaira.pdf
+
+# --- LaTeX build artifacts ---
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.run.xml
+*.bcf
+*.idx
+*.ind
+*.ilg
+*.xdv
+# NOTE: main.pdf is intentionally tracked — do NOT ignore *.pdf.

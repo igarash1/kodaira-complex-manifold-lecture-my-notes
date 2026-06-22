@@ -1,0 +1,52 @@
+% ============================================================
+%  Preamble: packages, theorem environments, and macros.
+% ============================================================
+
+% --- Layout ---
+\usepackage[a4paper,margin=1in]{geometry}
+
+% --- Japanese support (requires lualatex; uses bundled Haranoaji fonts) ---
+\usepackage{luatexja}
+
+% --- Math ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% --- Diagrams ---
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+% --- Lists ---
+\usepackage{enumitem}
+
+% --- Hyperlinks (load late) ---
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% --- Theorem environments (shared counter, numbered per chapter) ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Math macros ---
+% hyperref's PU encoding defines \C as a bookmark accent we never use;
+% reclaim it for the complex numbers (hence \renewcommand, not \newcommand).
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\dbar}{\bar{\partial}}      % Dolbeault operator
+\newcommand{\Oh}{\mathcal{O}}           % structure sheaf
+\DeclareMathOperator{\Hom}{Hom}
+% Sheaf cohomology: \coh{q}{X}{\Oh} -> H^q(X, O)
+\newcommand{\coh}[3]{H^{#1}\!\left(#2,\,#3\right)}
