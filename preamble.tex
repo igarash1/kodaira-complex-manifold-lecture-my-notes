@@ -24,19 +24,26 @@
 % --- Hyperlinks (load late) ---
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
-% --- Theorem environments (shared counter, numbered per chapter) ---
+% --- Theorem environments (abbreviated headers, following the handwritten notes) ---
+% Definitions are numbered per chapter (Def 1.1, 1.2, ...); theorems run
+% sequentially (Thm 1, 2, ...), matching the notebook's own numbering.
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{theorem}{Thm}
+\newtheorem{lemma}{Lem}[chapter]
+\newtheorem{proposition}{Prop}[chapter]
+\newtheorem{corollary}{Cor}[chapter]
+\newtheorem{claim}{Claim}[chapter]
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}{Def}[chapter]
+\newtheorem{example}{Ex}[chapter]
 
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}{Note}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+% Equations numbered per chapter: (1.1), (1.2), ...
+\numberwithin{equation}{chapter}
 
 % --- Math macros ---
 % hyperref's PU encoding defines \C as a bookmark accent we never use;

@@ -1,0 +1,185 @@
+\chapter{正則関数}
+
+\section{多変数正則関数}
+
+\subsection*{記法と準備}
+
+$n$ 次元複素空間を
+\[
+  \C^n = \{\, z = (z_1, \dots, z_n) \mid z_\nu \in \C \,\}
+\]
+とし，各成分を $z_\nu = x_\nu + i y_\nu$（$x_\nu, y_\nu \in \R$，$i = \sqrt{-1}$）と
+書く．実部・虚部をとる対応 $z \mapsto (x_1, y_1, \dots, x_n, y_n)$ により
+$\C^n \cong \R^{2n}$ とみなす．
+
+$z = (z_1, \dots, z_n)$ のノルムを
+\[
+  |z| = \Bigl( \sum_{\nu=1}^{n} |z_\nu|^2 \Bigr)^{1/2}
+\]
+で定める．$z, w \in \C^n$ に対して次が成り立つ：
+\begin{align}
+  |z_\nu| &\le |z| \le \sum_{\nu=1}^n |z_\nu|, \\
+  |z + w| &\le |z| + |w|, \\
+  \bigl|\, |z| - |w| \,\bigr| &\le |z - w|.
+\end{align}
+
+\begin{note}[多重指数]
+多重指数 $\alpha = (\alpha_1, \dots, \alpha_n) \in \Z_{\ge 0}^n$ に対し，
+\[
+  (z - a)^\alpha = \prod_{\nu=1}^n (z_\nu - a_\nu)^{\alpha_\nu}, \qquad
+  \sum_{\alpha} = \sum_{\alpha_1 = 0}^\infty \cdots \sum_{\alpha_n = 0}^\infty
+\]
+と略記する．
+\end{note}
+
+\subsection*{領域と多重円板}
+
+\begin{definition}[領域]
+$\C^n$ の連結開集合を\emph{領域}（domain）という．
+\end{definition}
+
+\begin{note}
+位相空間 $X$ が\emph{連結}であるとは，$X = U \cup V$，$U \cap V = \varnothing$，
+$U, V$ は開集合，という分割が $U = \varnothing$ または $V = \varnothing$ の場合に
+限ること（すなわち空でない二つの開集合に分割できないこと）をいう．$\C^n$ の
+開集合については，連結であることと弧状連結（任意の二点が領域内の道で結べること）
+であることは同値である．
+\end{note}
+
+\begin{definition}[多重円板]
+中心 $a = (a_1, \dots, a_n) \in \C^n$，多重半径 $r = (r_1, \dots, r_n)$
+（$r_\nu > 0$）に対し，
+\[
+  P(a, r) = \{\, z \in \C^n \mid |z_\nu - a_\nu| < r_\nu,\ \nu = 1, \dots, n \,\}
+\]
+を中心 $a$，半径 $r$ の\emph{多重円板}（polydisc）という．また
+$\partial_0 P(a, r) = \{\, \zeta \mid |\zeta_\nu - a_\nu| = r_\nu,\ \nu = 1, \dots, n \,\}$
+をその\emph{特異境界}（distinguished boundary）とよぶ．
+\end{definition}
+
+\begin{note}
+最大値ノルム $\|z\| = \max_{1 \le \nu \le n} |z_\nu|$ を用いると，多重円板は
+$\|z - a\|$ に関する「球」$\{\, z \mid \|z - a\| < r \,\}$（$r_1 = \dots = r_n = r$
+のとき）にあたる．
+\end{note}
+
+\subsection*{Wirtinger 微分と Cauchy--Riemann 方程式}
+
+$z_\nu = x_\nu + i y_\nu$ に対し，\emph{Wirtinger 微分}を
+\[
+  \frac{\partial}{\partial z_\nu}
+    = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} - i \frac{\partial}{\partial y_\nu} \Bigr),
+  \qquad
+  \frac{\partial}{\partial \bar z_\nu}
+    = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} + i \frac{\partial}{\partial y_\nu} \Bigr)
+\]
+で定める．以下，$C^1$ 級関数 $f$ を実部・虚部に分けて $f = u + i v$
+（$u, v$ は実数値関数）と書く．
+
+\begin{definition}[Cauchy--Riemann 方程式]
+$f = u + i v$ が変数 $z_\nu$ について\emph{正則}であるとは，
+\[
+  \frac{\partial f}{\partial \bar z_\nu} = 0
+\]
+が成り立つことをいう．これは Cauchy--Riemann 方程式
+\[
+  \frac{\partial u}{\partial x_\nu} = \frac{\partial v}{\partial y_\nu}, \qquad
+  \frac{\partial u}{\partial y_\nu} = -\frac{\partial v}{\partial x_\nu}
+\]
+と同値である．
+\end{definition}
+
+\begin{proof}
+定義より
+\[
+  \frac{\partial f}{\partial \bar z_\nu}
+  = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} + i \frac{\partial}{\partial y_\nu} \Bigr)(u + i v)
+  = \frac{1}{2}\Bigl[ \Bigl( \frac{\partial u}{\partial x_\nu} - \frac{\partial v}{\partial y_\nu} \Bigr)
+      + i \Bigl( \frac{\partial v}{\partial x_\nu} + \frac{\partial u}{\partial y_\nu} \Bigr) \Bigr].
+\]
+複素数が $0$ であることは実部と虚部がともに $0$ であることと同値だから，
+$\partial f / \partial \bar z_\nu = 0$ は上の Cauchy--Riemann 方程式と同値である．
+\end{proof}
+
+\subsection*{べき級数の収束}
+
+\begin{claim}\label{cl:abel}
+べき級数 $\sum_{\alpha} a_\alpha (z - a)^\alpha$ がある点
+$\zeta$（$|\zeta_\nu - a_\nu| = r_\nu > 0$）において各項有界，すなわち
+$|a_\alpha (\zeta - a)^\alpha| \le M$（すべての $\alpha$）であるとする．このとき，
+$0 < r'_\nu < r_\nu$ なる多重円板の閉包 $\overline{P(a, r')}$ 上で，この級数は
+絶対かつ一様に収束する．
+\end{claim}
+
+\begin{proof}
+$\theta_\nu = r'_\nu / r_\nu < 1$ とおく．$|z_\nu - a_\nu| \le r'_\nu$ のとき
+\[
+  |a_\alpha (z - a)^\alpha|
+  = |a_\alpha (\zeta - a)^\alpha| \prod_{\nu=1}^n
+      \left| \frac{z_\nu - a_\nu}{\zeta_\nu - a_\nu} \right|^{\alpha_\nu}
+  \le M \prod_{\nu=1}^n \theta_\nu^{\alpha_\nu}.
+\]
+多重指数 $\alpha$ について和をとると，等比級数の積として
+\[
+  \sum_{\alpha} M \prod_{\nu=1}^n \theta_\nu^{\alpha_\nu}
+  = M \prod_{\nu=1}^n \Bigl( \sum_{k=0}^\infty \theta_\nu^{k} \Bigr)
+  = M \prod_{\nu=1}^n \frac{1}{1 - \theta_\nu} < \infty
+\]
+が得られる．右辺は $z$ によらない定数だから，Weierstrass の $M$ 判定法により
+級数は $\overline{P(a, r')}$ 上で絶対かつ一様に収束する．
+\end{proof}
+
+\subsection*{Theorem 1：べき級数展開}
+
+\begin{theorem}\label{thm:power-series}
+$W \subseteq \C^n$ を領域とし，$f$ は $W$ 上連続で，かつ各変数 $z_\nu$ について
+（他の変数を固定するごとに）正則であるとする．このとき，閉包が $W$ に含まれる
+任意の多重円板 $P(a, r)$ 上で，$f$ は収束べき級数
+\[
+  f(z) = \sum_{\alpha} c_\alpha (z - a)^\alpha
+\]
+で表される．とくに $f$ は $W$ 上正則である．
+\end{theorem}
+
+\begin{proof}
+1 変数の Cauchy の積分公式を各変数に順に適用する．まず $z_2, \dots, z_n$ を
+固定すると $f$ は $z_1$ について正則だから，
+\[
+  f(z_1, z_2, \dots, z_n)
+  = \frac{1}{2\pi i} \oint_{|\zeta_1 - a_1| = r_1}
+      \frac{f(\zeta_1, z_2, \dots, z_n)}{\zeta_1 - z_1}\, d\zeta_1 .
+\]
+これを $z_2, \dots, z_n$ についても順に繰り返す．$f$ の連続性から各重積分は
+意味をもち，反復積分は重積分に等しい（Fubini の定理）から，
+\[
+  f(z) = \frac{1}{(2\pi i)^n}
+    \oint_{|\zeta_n - a_n| = r_n} \!\!\!\! \cdots \oint_{|\zeta_1 - a_1| = r_1}
+    \frac{f(\zeta_1, \dots, \zeta_n)}{(\zeta_1 - z_1) \cdots (\zeta_n - z_n)}\,
+    d\zeta_1 \cdots d\zeta_n .
+\]
+次に各因子を等比級数に展開する．$|z_\nu - a_\nu| < r_\nu = |\zeta_\nu - a_\nu|$
+のとき
+\[
+  \frac{1}{\zeta_\nu - z_\nu}
+  = \frac{1}{(\zeta_\nu - a_\nu) - (z_\nu - a_\nu)}
+  = \sum_{k=0}^\infty \frac{(z_\nu - a_\nu)^k}{(\zeta_\nu - a_\nu)^{k+1}} ,
+\]
+であり，$\bigl| (z_\nu - a_\nu)/(\zeta_\nu - a_\nu) \bigr| \le \theta_\nu < 1$
+ゆえこの収束は積分路 $\partial_0 P$ 上一様である．したがって積をとって項別に
+積分してよく，
+\[
+  f(z) = \sum_{\alpha} c_\alpha (z - a)^\alpha , \qquad
+  c_\alpha = \frac{1}{(2\pi i)^n}
+    \oint \cdots \oint
+    \frac{f(\zeta)}{(\zeta_1 - a_1)^{\alpha_1 + 1} \cdots (\zeta_n - a_n)^{\alpha_n + 1}}\,
+    d\zeta_1 \cdots d\zeta_n
+\]
+を得る．さらに $M = \sup_{\partial_0 P} |f|$ とおくと，係数は
+\[
+  |c_\alpha| \le \frac{M}{r^\alpha}, \qquad r^\alpha = \prod_{\nu=1}^n r_\nu^{\alpha_\nu}
+\]
+を満たす（Cauchy の評価）．ゆえに各項は $\overline{P(a, r')}$（$r'_\nu < r_\nu$）上で
+$M (r'/r)^\alpha$ で押さえられ，Claim~\ref{cl:abel} によりべき級数は
+$P(a, r)$ の内部で絶対かつ一様に収束する．これで $f$ がべき級数展開をもつことが
+示され，とくに $f$ は $W$ 上正則である．
+\end{proof}

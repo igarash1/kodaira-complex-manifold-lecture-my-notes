@@ -21,16 +21,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile main.tex
+      - name: Compile documents (main-*.tex)
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex
-          # The document contains Japanese (luatexja) and needs the lualatex engine.
+          root_file: "main-*.tex"
+          glob_root_file: true
+          # The documents contain Japanese (luatexja) and need the lualatex engine.
           # Without this, the action's default `-pdf` would force pdflatex.
           latexmk_use_lualatex: true
 
-      - name: Commit built PDF
+      - name: Commit built PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "build: update main.pdf [skip ci]"
-          file_pattern: main.pdf
+          commit_message: "build: update PDFs [skip ci]"
+          file_pattern: "main-*.pdf"
