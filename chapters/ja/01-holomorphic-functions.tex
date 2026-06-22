@@ -47,7 +47,7 @@ $U, V$ は開集合，という分割が $U = \varnothing$ または $V = \varno
 \end{note}
 
 \begin{definition}[多重円板]
-中心 $a = (a_1, \dots, a_n) \in \C^n$，多重半径 $r = (r_1, \dots, r_n)$
+$a = (a_1, \dots, a_n) \in \C^n$ $r = (r_1, \dots, r_n)$
 （$r_\nu > 0$）に対し，
 \[
   P(a, r) = \{\, z \in \C^n \mid |z_\nu - a_\nu| < r_\nu,\ \nu = 1, \dots, n \,\}
@@ -74,7 +74,7 @@ $z_\nu = x_\nu + i y_\nu$ に対し，\emph{Wirtinger 微分}を
 で定める．以下，$C^1$ 級関数 $f$ を実部・虚部に分けて $f = u + i v$
 （$u, v$ は実数値関数）と書く．
 
-\begin{definition}[Cauchy--Riemann 方程式]
+\begin{definition}[正則, Cauchy--Riemann 方程式]
 $f = u + i v$ が変数 $z_\nu$ について\emph{正則}であるとは，
 \[
   \frac{\partial f}{\partial \bar z_\nu} = 0
@@ -101,82 +101,93 @@ $\partial f / \partial \bar z_\nu = 0$ は上の Cauchy--Riemann 方程式と同
 
 \subsection*{べき級数の収束}
 
-\begin{claim}\label{cl:abel}
-べき級数 $\sum_{\alpha} a_\alpha (z - a)^\alpha$ がある点
-$\zeta$（$|\zeta_\nu - a_\nu| = r_\nu > 0$）において各項有界，すなわち
-$|a_\alpha (\zeta - a)^\alpha| \le M$（すべての $\alpha$）であるとする．このとき，
-$0 < r'_\nu < r_\nu$ なる多重円板の閉包 $\overline{P(a, r')}$ 上で，この級数は
-絶対収束する．
-\end{claim}
+\begin{note}
+$f(z)$ が $W$ の各点 $a$ の近傍で収束べき級数
+\[
+  f(z) = \sum_{k_1, \dots, k_n \ge 0}
+    c_{k_1 \cdots k_n} (z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n}
+\]
+に展開できるとき，$f(z)$ は正則関数である．
+\end{note}
+
+\begin{proposition}\label{cl:abel}
+べき級数 $\sum_{k_1, \dots, k_n \ge 0} c_{k_1 \cdots k_n}
+(z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n}$ がある点 $w$ で収束すれば，これは
+\[
+  |z_\nu - a_\nu| < |w_\nu - a_\nu| \qquad (\nu = 1, \dots, n)
+\]
+を満たす $z$ において絶対収束する．
+\end{proposition}
 
 \begin{proof}
-$\theta_\nu = r'_\nu / r_\nu < 1$ とおく．$|z_\nu - a_\nu| \le r'_\nu$ のとき
+$a = 0$ としてよい（$z_\nu - a_\nu$ を改めて $z_\nu$ とおけばよい）．級数が $w$ で
+収束するから，その各項は有界であり，
 \[
-  |a_\alpha (z - a)^\alpha|
-  = |a_\alpha (\zeta - a)^\alpha| \prod_{\nu=1}^n
-      \left| \frac{z_\nu - a_\nu}{\zeta_\nu - a_\nu} \right|^{\alpha_\nu}
-  \le M \prod_{\nu=1}^n \theta_\nu^{\alpha_\nu}.
+  |c_{k_1 \cdots k_n} \, w_1^{k_1} \cdots w_n^{k_n}| \le C
+  \qquad (\forall\, k_1, \dots, k_n)
 \]
-$\alpha$ について和をとると，等比級数の積として
+となる定数 $C < \infty$ がとれる．$|z_\nu| < |w_\nu|$ のとき
 \[
-  \sum_{\alpha} M \prod_{\nu=1}^n \theta_\nu^{\alpha_\nu}
-  = M \prod_{\nu=1}^n \Bigl( \sum_{k=0}^\infty \theta_\nu^{k} \Bigr)
-  = M \prod_{\nu=1}^n \frac{1}{1 - \theta_\nu} < \infty
+  |c_{k_1 \cdots k_n} \, z_1^{k_1} \cdots z_n^{k_n}|
+  = |c_{k_1 \cdots k_n} \, w_1^{k_1} \cdots w_n^{k_n}|
+    \prod_{\nu=1}^n \left| \frac{z_\nu}{w_\nu} \right|^{k_\nu}
+  \le C \prod_{\nu=1}^n \left| \frac{z_\nu}{w_\nu} \right|^{k_\nu}
 \]
-が得られる．ゆえに $\sum_{\alpha} |a_\alpha (z - a)^\alpha|$ は収束し，級数は
-$\overline{P(a, r')}$ 上で絶対収束する．
+だから，
+\[
+  \sum_{k_1, \dots, k_n \ge 0} |c_{k_1 \cdots k_n} \, z_1^{k_1} \cdots z_n^{k_n}|
+  \le C \prod_{\nu=1}^n \sum_{k=0}^\infty \left| \frac{z_\nu}{w_\nu} \right|^{k}
+  = C \prod_{\nu=1}^n \frac{1}{1 - |z_\nu / w_\nu|} < \infty .
+\]
+よって級数は絶対収束する．
 \end{proof}
 
 \subsection*{Theorem 1：べき級数展開}
 
 \begin{theorem}\label{thm:power-series}
-$W \subseteq \C^n$ を領域とし，$f$ は $W$ 上連続で，かつ各変数 $z_\nu$ について
-（他の変数を固定するごとに）正則であるとする．このとき，閉包が $W$ に含まれる
-任意の多重円板 $P(a, r)$ 上で，$f$ は収束べき級数
-\[
-  f(z) = \sum_{\alpha} c_\alpha (z - a)^\alpha
-\]
-で表される．とくに $f$ は $W$ 上正則である．
+$W \subseteq \C^n$ を領域とする．$f(z)$ が $W$ で連続で，かつ各変数 $z_\nu$ について
+（他の変数を固定するごとに）正則ならば，$f(z)$ は $n$ 変数 $z = (z_1, \dots, z_n)$ の
+正則関数である．
 \end{theorem}
 
 \begin{proof}
-1 変数の Cauchy の積分公式を各変数に順に適用する．まず $z_2, \dots, z_n$ を
-固定すると $f$ は $z_1$ について正則だから，
+$a$ を $W$ の任意の点とする．$W$ は開集合だから，
+\[
+  \{\, z \mid |z_\nu - a_\nu| \le r_\nu,\ \nu = 1, \dots, n \,\} \subset W
+\]
+となる $r = (r_1, \dots, r_n)$ がとれる．$f$ は $z_1$ について正則だから，$z_1$ 平面で
+Cauchy の積分公式を用いて
 \[
   f(z_1, z_2, \dots, z_n)
-  = \frac{1}{2\pi i} \oint_{|\zeta_1 - a_1| = r_1}
-      \frac{f(\zeta_1, z_2, \dots, z_n)}{\zeta_1 - z_1}\, d\zeta_1 .
+  = \frac{1}{2\pi i} \oint_{|w_1 - a_1| = r_1}
+      \frac{f(w_1, z_2, \dots, z_n)}{w_1 - z_1}\, dw_1 .
 \]
-これを $z_2, \dots, z_n$ についても順に繰り返す．$f$ の連続性から各重積分は
-意味をもち，反復積分は重積分に等しい（Fubini の定理）から，
+各変数についてこれを繰り返す．$f$ は連続だから反復積分は重積分に等しく（積分の
+順序は交換できる），
 \[
   f(z) = \frac{1}{(2\pi i)^n}
-    \oint_{|\zeta_n - a_n| = r_n} \!\!\!\! \cdots \oint_{|\zeta_1 - a_1| = r_1}
-    \frac{f(\zeta_1, \dots, \zeta_n)}{(\zeta_1 - z_1) \cdots (\zeta_n - z_n)}\,
-    d\zeta_1 \cdots d\zeta_n .
+    \oint_{|w_1 - a_1| = r_1} \!\!\!\! \cdots \oint_{|w_n - a_n| = r_n}
+    \frac{f(w_1, \dots, w_n)}{(w_1 - z_1) \cdots (w_n - z_n)}\, dw_1 \cdots dw_n .
 \]
-次に各因子を等比級数に展開する．$|z_\nu - a_\nu| < r_\nu = |\zeta_\nu - a_\nu|$
-のとき
+ここで $|z_\nu - a_\nu| < r_\nu = |w_\nu - a_\nu|$ に注意すると，各因子は
 \[
-  \frac{1}{\zeta_\nu - z_\nu}
-  = \frac{1}{(\zeta_\nu - a_\nu) - (z_\nu - a_\nu)}
-  = \sum_{k=0}^\infty \frac{(z_\nu - a_\nu)^k}{(\zeta_\nu - a_\nu)^{k+1}} ,
+  \frac{1}{w_\nu - z_\nu}
+  = \frac{1}{w_\nu - a_\nu} \cdot
+    \frac{1}{1 - \dfrac{z_\nu - a_\nu}{w_\nu - a_\nu}}
+  = \sum_{k=0}^\infty \frac{(z_\nu - a_\nu)^k}{(w_\nu - a_\nu)^{k+1}}
 \]
-であり，$\bigl| (z_\nu - a_\nu)/(\zeta_\nu - a_\nu) \bigr| \le \theta_\nu < 1$
-ゆえ各因子は収束する．これらの積をとって項別に積分すると，
+と展開できる．これらを代入して項別に積分すると，
 \[
-  f(z) = \sum_{\alpha} c_\alpha (z - a)^\alpha , \qquad
-  c_\alpha = \frac{1}{(2\pi i)^n}
-    \oint \cdots \oint
-    \frac{f(\zeta)}{(\zeta_1 - a_1)^{\alpha_1 + 1} \cdots (\zeta_n - a_n)^{\alpha_n + 1}}\,
-    d\zeta_1 \cdots d\zeta_n
+  f(z) = \sum_{k_1, \dots, k_n \ge 0}
+    c_{k_1 \cdots k_n} (z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n} ,
 \]
-を得る．さらに $M = \max\{\, |f(\zeta)| \mid |\zeta_\nu - a_\nu| = r_\nu,\ \nu = 1, \dots, n \,\}$ とおくと，係数は
+ただし
 \[
-  |c_\alpha| \le \frac{M}{r^\alpha}, \qquad r^\alpha = \prod_{\nu=1}^n r_\nu^{\alpha_\nu}
+  c_{k_1 \cdots k_n} = \frac{1}{(2\pi i)^n}
+    \oint_{|w_1 - a_1| = r_1} \!\!\!\! \cdots \oint_{|w_n - a_n| = r_n}
+    \frac{f(w_1, \dots, w_n)}
+         {(w_1 - a_1)^{k_1 + 1} \cdots (w_n - a_n)^{k_n + 1}}\, dw_1 \cdots dw_n
 \]
-を満たす（Cauchy の評価）．ゆえに各項は $\overline{P(a, r')}$（$r'_\nu < r_\nu$）上で
-$M (r'/r)^\alpha$ で押さえられ，Claim~\ref{cl:abel} によりべき級数は
-$P(a, r)$ の内部で絶対収束する．これで $f$ がべき級数展開をもつことが
-示され，とくに $f$ は $W$ 上正則である．
+である．よって $f$ は $W$ の各点の近傍で収束べき級数に展開され，$n$ 変数の
+正則関数である．
 \end{proof}
