@@ -1,0 +1,198 @@
+\chapter{Holomorphic Functions}
+
+\section{Holomorphic functions of several variables}
+
+\subsection*{Notation and preliminaries}
+
+Let the $n$-dimensional complex space be
+\[
+  \C^n = \{\, z = (z_1, \dots, z_n) \mid z_\nu \in \C \,\},
+\]
+and write each coordinate as $z_\nu = x_\nu + i y_\nu$
+($x_\nu, y_\nu \in \R$, $i = \sqrt{-1}$). Through the correspondence
+$z \mapsto (x_1, y_1, \dots, x_n, y_n)$ taking real and imaginary parts, we
+identify $\C^n \cong \R^{2n}$.
+
+Define the norm of $z = (z_1, \dots, z_n)$ by
+\[
+  |z| = \Bigl( \sum_{\nu=1}^{n} |z_\nu|^2 \Bigr)^{1/2}.
+\]
+For $z, w \in \C^n$ the following hold:
+\begin{align}
+  |z_\nu| &\le |z| \le \sum_{\nu=1}^n |z_\nu|, \\
+  |z + w| &\le |z| + |w|, \\
+  \bigl|\, |z| - |w| \,\bigr| &\le |z - w|.
+\end{align}
+
+\subsection*{Holomorphic functions}
+
+\begin{definition}\label{def:holomorphic}
+Let $D \subseteq \C^n$. We say that $f(z) = f(z_1, \dots, z_n)$ is a
+\emph{holomorphic function} on $D$ if $f$ is continuous on $D$ and is
+holomorphic in each variable $z_\nu$ separately (the other variables being held
+fixed).
+\end{definition}
+
+\subsection*{Domains and polydiscs}
+
+\begin{definition}[domain]
+A connected open subset of $\C^n$ is called a \emph{domain}.
+\end{definition}
+
+\begin{note}
+A topological space $X$ is \emph{connected} if every decomposition
+$X = U \cup V$ with $U \cap V = \varnothing$ and $U, V$ open satisfies
+$U = \varnothing$ or $V = \varnothing$ (that is, $X$ cannot be split into two
+nonempty open sets). For open subsets of $\C^n$, connectedness is equivalent to
+path-connectedness (any two points can be joined by a path within the set).
+\end{note}
+
+\begin{definition}[polydisc]
+For $a = (a_1, \dots, a_n) \in \C^n$ and $r = (r_1, \dots, r_n)$ ($r_\nu > 0$),
+\[
+  P(a, r) = \{\, z \in \C^n \mid |z_\nu - a_\nu| < r_\nu,\ \nu = 1, \dots, n \,\}
+\]
+is called the \emph{polydisc} with center $a$ and radius $r$.
+\end{definition}
+
+\begin{note}
+With the maximum norm $\|z\| = \max_{1 \le \nu \le n} |z_\nu|$, a polydisc is
+the ``ball'' $\{\, z \mid \|z - a\| < r \,\}$ with respect to $\|z - a\|$ (when
+$r_1 = \dots = r_n = r$).
+\end{note}
+
+\subsection*{Wirtinger derivatives (complex derivatives) and the Cauchy--Riemann equations}
+
+For $z_\nu = x_\nu + i y_\nu$, define the \emph{Wirtinger derivatives} by
+\[
+  \frac{\partial}{\partial z_\nu}
+    = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} - i \frac{\partial}{\partial y_\nu} \Bigr),
+  \qquad
+  \frac{\partial}{\partial \bar z_\nu}
+    = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} + i \frac{\partial}{\partial y_\nu} \Bigr).
+\]
+In what follows we split a $C^1$ function $f$ into real and imaginary parts,
+$f = u + i v$ ($u, v$ real-valued).
+
+\begin{definition}[holomorphy, Cauchy--Riemann equations]
+We say that $f = u + i v$ is \emph{holomorphic} in the variable $z_\nu$ if
+\[
+  \frac{\partial f}{\partial \bar z_\nu} = 0 .
+\]
+This is equivalent to the Cauchy--Riemann equations
+\[
+  \frac{\partial u}{\partial x_\nu} = \frac{\partial v}{\partial y_\nu}, \qquad
+  \frac{\partial u}{\partial y_\nu} = -\frac{\partial v}{\partial x_\nu} .
+\]
+\end{definition}
+
+\begin{proof}
+By definition,
+\[
+  \frac{\partial f}{\partial \bar z_\nu}
+  = \frac{1}{2}\Bigl( \frac{\partial}{\partial x_\nu} + i \frac{\partial}{\partial y_\nu} \Bigr)(u + i v)
+  = \frac{1}{2}\Bigl[ \Bigl( \frac{\partial u}{\partial x_\nu} - \frac{\partial v}{\partial y_\nu} \Bigr)
+      + i \Bigl( \frac{\partial v}{\partial x_\nu} + \frac{\partial u}{\partial y_\nu} \Bigr) \Bigr].
+\]
+A complex number is $0$ exactly when its real and imaginary parts both vanish,
+so $\partial f / \partial \bar z_\nu = 0$ is equivalent to the Cauchy--Riemann
+equations above.
+\end{proof}
+
+\subsection*{Convergence of power series}
+
+\begin{note}
+If, in a neighborhood of each point $a$ of $W$, $f(z)$ can be expanded as a
+convergent power series
+\[
+  f(z) = \sum_{k_1, \dots, k_n \ge 0}
+    c_{k_1 \cdots k_n} (z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n},
+\]
+then $f(z)$ is a holomorphic function.
+\end{note}
+
+\begin{proposition}\label{cl:abel}
+If the power series $\sum_{k_1, \dots, k_n \ge 0} c_{k_1 \cdots k_n}
+(z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n}$ converges at some point $w$, then it
+converges absolutely for every $z$ satisfying
+\[
+  |z_\nu - a_\nu| < |w_\nu - a_\nu| \qquad (\nu = 1, \dots, n).
+\]
+\end{proposition}
+
+\begin{proof}
+We may assume $a = 0$ (replace $z_\nu - a_\nu$ by $z_\nu$). Since the series
+converges at $w$, its terms are bounded: there is a constant $C < \infty$ with
+\[
+  |c_{k_1 \cdots k_n} \, w_1^{k_1} \cdots w_n^{k_n}| \le C
+  \qquad (\forall\, k_1, \dots, k_n).
+\]
+For $|z_\nu| < |w_\nu|$,
+\[
+  |c_{k_1 \cdots k_n} \, z_1^{k_1} \cdots z_n^{k_n}|
+  = |c_{k_1 \cdots k_n} \, w_1^{k_1} \cdots w_n^{k_n}|
+    \prod_{\nu=1}^n \left| \frac{z_\nu}{w_\nu} \right|^{k_\nu}
+  \le C \prod_{\nu=1}^n \left| \frac{z_\nu}{w_\nu} \right|^{k_\nu},
+\]
+and therefore
+\[
+  \sum_{k_1, \dots, k_n \ge 0} |c_{k_1 \cdots k_n} \, z_1^{k_1} \cdots z_n^{k_n}|
+  \le C \prod_{\nu=1}^n \sum_{k=0}^\infty \left| \frac{z_\nu}{w_\nu} \right|^{k}
+  = C \prod_{\nu=1}^n \frac{1}{1 - |z_\nu / w_\nu|} < \infty .
+\]
+Hence the series converges absolutely.
+\end{proof}
+
+\subsection*{Theorem 1: power-series expansion}
+
+\begin{theorem}\label{thm:power-series}
+Let $W \subseteq \C^n$ be a domain. If $f(z)$ is continuous on $W$ and
+holomorphic in each variable $z_\nu$ separately (the other variables being held
+fixed), then $f(z)$ is a holomorphic function of the $n$ variables
+$z = (z_1, \dots, z_n)$.
+\end{theorem}
+
+\begin{proof}
+Let $a$ be an arbitrary point of $W$. Since $W$ is open, we may choose
+$r = (r_1, \dots, r_n)$ with
+\[
+  \{\, z \mid |z_\nu - a_\nu| \le r_\nu,\ \nu = 1, \dots, n \,\} \subset W .
+\]
+As $f$ is holomorphic in $z_1$, the Cauchy integral formula in the $z_1$-plane
+gives
+\[
+  f(z_1, z_2, \dots, z_n)
+  = \frac{1}{2\pi i} \oint_{|w_1 - a_1| = r_1}
+      \frac{f(w_1, z_2, \dots, z_n)}{w_1 - z_1}\, dw_1 .
+\]
+Repeating this for each variable, and using that $f$ is continuous so that the
+iterated integral equals the multiple integral (the order of integration may be
+exchanged), we obtain
+\[
+  f(z) = \frac{1}{(2\pi i)^n}
+    \oint_{|w_1 - a_1| = r_1} \!\!\!\! \cdots \oint_{|w_n - a_n| = r_n}
+    \frac{f(w_1, \dots, w_n)}{(w_1 - z_1) \cdots (w_n - z_n)}\, dw_1 \cdots dw_n .
+\]
+Now, noting that $|z_\nu - a_\nu| < r_\nu = |w_\nu - a_\nu|$, each factor expands
+as
+\[
+  \frac{1}{w_\nu - z_\nu}
+  = \frac{1}{w_\nu - a_\nu} \cdot
+    \frac{1}{1 - \dfrac{z_\nu - a_\nu}{w_\nu - a_\nu}}
+  = \sum_{k=0}^\infty \frac{(z_\nu - a_\nu)^k}{(w_\nu - a_\nu)^{k+1}} .
+\]
+Substituting these and integrating term by term,
+\[
+  f(z) = \sum_{k_1, \dots, k_n \ge 0}
+    c_{k_1 \cdots k_n} (z_1 - a_1)^{k_1} \cdots (z_n - a_n)^{k_n},
+\]
+where
+\[
+  c_{k_1 \cdots k_n} = \frac{1}{(2\pi i)^n}
+    \oint_{|w_1 - a_1| = r_1} \!\!\!\! \cdots \oint_{|w_n - a_n| = r_n}
+    \frac{f(w_1, \dots, w_n)}
+         {(w_1 - a_1)^{k_1 + 1} \cdots (w_n - a_n)^{k_n + 1}}\, dw_1 \cdots dw_n .
+\]
+Hence $f$ is expanded as a convergent power series in a neighborhood of each
+point of $W$, and is therefore a holomorphic function of $n$ variables.
+\end{proof}
